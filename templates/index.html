@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Life Expectancy Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Life Expectancy Predictor</h1>
+        <p>Enter the health and economic data to predict life expectancy category</p>
+        
+        <form method="POST" action="/predict">
+            <div class="form-group">
+                <label>Adult Mortality (per 1000):</label>
+                <input type="number" name="adult_mortality" step="0.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Infant Deaths (per 1000):</label>
+                <input type="number" name="infant_deaths" step="0.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label>GDP (per capita):</label>
+                <input type="number" name="gdp" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label>BMI (average):</label>
+                <input type="number" name="bmi" step="0.1" required>
+            </div>
+            
+            <button type="submit">Predict Life Expectancy</button>
+        </form>
+        
+        {% if prediction %}
+            <div class="result">
+                <h2>Prediction: {{ prediction }} Life Expectancy</h2>
+                <p>Confidence: {{ confidence }}%</p>
+            </div>
+        {% endif %}
+        
+        {% if error %}
+            <div class="error">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
