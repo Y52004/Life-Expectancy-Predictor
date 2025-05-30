@@ -23,8 +23,7 @@ def predict():
         bmi = float(request.form['bmi'])
         features = np.array([[adult_mortality, infant_deaths, gdp, bmi]])
         prediction = model.predict(features)[0]
-        confidence = max(model.predict_proba(features)[0]) * 100
-        return render_template('index.html', prediction=prediction, confidence=round(confidence, 1))
+        return render_template('index.html', prediction=prediction)
     except Exception as e:
         return render_template('index.html', error="Please enter valid numbers for all fields")
 
